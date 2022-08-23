@@ -21,12 +21,9 @@ jobs:
     # The supported nomenclature for tags is: <project.name>-<version>, for example: Onx.Api.Common-1.0.0.
     # Optional branch's name or preview is also supported: Onx.Api.Common-1.0.0-dev.
     # WARNING: the solution must also have a folder named exactly as CSPROJ extracted from the tag.
-    - name: Set PROJECT from tag.
+    - name: Set PROJECT from tag
       run: echo "CSPROJ=$(echo "${GITHUB_REF}" | sed -r 's/refs\/tags\/([^-]+)-([0-9+]).*/\1/g')" >> $GITHUB_ENV
-
-    - name: Echoing
-      run: echo "${CSPROJ}"
- 
+      
     - name: Ensure GitHub NuGet Source
       run: >
         dotnet nuget add source
@@ -43,6 +40,6 @@ jobs:
       run: dotnet pack -c Release --no-build --output ./pack ${{ env.CSPROJ }}/${{ env.CSPROJ }}.csproj
 
     - name: NuGet Push
-      run: dotnet nuget push ./pack --source https://nuget.pkg.github.com/oneex-sas/index.json --api-key ${GITHUB_TOKEN}
+      run: dotnet nuget push ./pack/ --source https://nuget.pkg.github.com/oneex-sas/index.json --api-key ${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
