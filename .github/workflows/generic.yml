@@ -37,10 +37,10 @@ jobs:
         "https://nuget.pkg.github.com/oneex-sas/index.json"
 
     - name: Build
-      run: dotnet build --configuration Release ${CSPROJ}/${CSPROJ}.csproj
+      run: dotnet build --configuration Release ${{ env.CSPROJ }}/${{ env.CSPROJ }}.csproj
 
     - name: NuGet Pack
-      run: dotnet pack -c Release --no-build --output ./pack ${CSPROJ}/${CSPROJ}.csproj
+      run: dotnet pack -c Release --no-build --output ./pack ${{ env.CSPROJ }}/${{ env.CSPROJ }}.csproj
 
     - name: NuGet Push
       run: dotnet nuget push ./pack --source https://nuget.pkg.github.com/oneex-sas/index.json --api-key ${GITHUB_TOKEN}
