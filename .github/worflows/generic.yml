@@ -1,0 +1,48 @@
+name: Generic dotnet packaging
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "*-[0-9]+.[0-9]+.[0-9]+-*"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    
+    # The supported nomenclature for tags is: <project.name>-<version>, for example: Onx.Api.Common-1.0.0.
+    # Optional branch's name or preview is also supported: Onx.Api.Common-1.0.0-dev.
+    # WARNING: the solution must also have a folder named exactly as CSPROJ extracted from the tag.
+    - name: Set PROJECT from tag.
+      run: echo "CSPROJ=$(echo "${GITHUB_REF}" | sed -r 's/refs\/tags\/([^-]+)-([0-9+]).*/\1/g')" >> $GITHUB_ENV
+
+    - name: Echoing
+      run: echo "${CSPROJ}"
+ 
+    - name: Ensure GitHub NuGet Source
+      run: >
+        dotnet nuget add source
+        -n github
+        -u ${{ secrets.REGISTRY_TOKEN }}
+        -p ${{ secrets.REGISTRY_TOKEN }}
+        --store-password-in-clear-text
+        "https://nuget.pkg.github.com/oneex-sas/index.json"
+
+    - name: Build
+      run: dotnet build --configuration Release ${CSPROJ}/${CSPROJ}.csproj
+
+    - name: NuGet Pack
+      run: dotnet pack -c Release --no-build --output ./pack ${CSPROJ}/${CSPROJ}.csproj
+
+    - name: NuGet Push
+      run: dotnet nuget push ./pack --source https://nuget.pkg.github.com/oneex-sas/index.json --api-key ${GITHUB_TOKEN}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
