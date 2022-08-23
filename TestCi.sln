@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32721.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onx.Test.LibA", "Onx.Test.LibA\Onx.Test.LibA.csproj", "{8AE8450D-D949-475F-92D9-8ADB270A29E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onx.Test.LibB", "Onx.Test.LibB\Onx.Test.LibB.csproj", "{683535B3-09D8-494B-B913-BE90ABFE4C50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8AE8450D-D949-475F-92D9-8ADB270A29E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AE8450D-D949-475F-92D9-8ADB270A29E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AE8450D-D949-475F-92D9-8ADB270A29E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AE8450D-D949-475F-92D9-8ADB270A29E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{683535B3-09D8-494B-B913-BE90ABFE4C50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{683535B3-09D8-494B-B913-BE90ABFE4C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{683535B3-09D8-494B-B913-BE90ABFE4C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{683535B3-09D8-494B-B913-BE90ABFE4C50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2898B687-34BC-43DA-B5A0-BF2823ADCF10}
+	EndGlobalSection
+EndGlobal
